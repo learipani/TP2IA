@@ -8,9 +8,12 @@ import java.awt.BorderLayout;
 import javax.swing.BoxLayout;
 import javax.swing.JTextField;
 
+import productionsystem.InferenceEngine;
 import productionsystem.ProductionSystem;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Color;
 import java.awt.SystemColor;
 import java.awt.event.KeyAdapter;
@@ -56,25 +59,30 @@ public class UI {
 		frmTpIa = new JFrame();
 		frmTpIa.setTitle("TP IA");
 		frmTpIa.setResizable(false);
-		frmTpIa.setBounds(100, 100, 800, 500);
+		frmTpIa.setBounds(100, 100, 1000, 500);
 		frmTpIa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTpIa.getContentPane().setLayout(null);
 		
 		TextArea textAreaLog = new TextArea();
 		textAreaLog.setBackground(SystemColor.controlHighlight);
 		textAreaLog.setEditable(false);
-		textAreaLog.setBounds(10, 143, 772, 314);
+		textAreaLog.setBounds(10, 143, 972, 314);
 		frmTpIa.getContentPane().add(textAreaLog);
 		
 		textFieldSmartToySay = new JTextField();
 		textFieldSmartToySay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				textAreaLog.append("\n SmartToy dice: " + textFieldSmartToySay.getText());
+				String aux;
+				textAreaLog.append("SmartToy dice: " + textFieldSmartToySay.getText());
 				productionSystemInstace.appendLog(textFieldSmartToySay.getText());
+				aux = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion());
+				textAreaLog.append("\n El dispositivo reacciona de la siguiente manera: " + aux);
 				textFieldSmartToySay.setText("");
+				textAreaLog.append("\n\n");
+				
 			}
 		});
-		textFieldSmartToySay.setBounds(10, 82, 772, 25);
+		textFieldSmartToySay.setBounds(10, 82, 970, 25);
 		frmTpIa.getContentPane().add(textFieldSmartToySay);
 		textFieldSmartToySay.setColumns(10);
 		

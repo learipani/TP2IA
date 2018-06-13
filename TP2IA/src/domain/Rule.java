@@ -4,6 +4,17 @@ import java.util.List;
 
 public class Rule {
 
+	public static String ACTION_RULE1 = "No hacer nada";
+	public static String ACTION_RULE2 = "Emitir audio que indique al niño que no es obligación contestar";
+	public static String ACTION_RULE3 = "Emitir audio que indique al niño que no conteste la pregunta";
+	public static String ACTION_RULE4 = "Comenzar una grabación de la charla";
+	public static String ACTION_RULE5 = "Enviar un aviso vía e-mail a los padres";
+	public static String ACTION_RULE6 = "Enviar un aviso inmediato vía smartphone a los padres";
+	public static String ACTION_RULE7 = "Bloquear conexión a internet";
+	public static String ACTION_RULE8 = "Acción sin definir";
+	public static String ACTION_RULE9 = "Acción sin definir";
+	public static String ACTION_RULE10 = "Acción sin definir";
+	
 	//Variables
 	private List<PalabraClave> condicion;
 	private String accion;

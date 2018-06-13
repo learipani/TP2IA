@@ -10,7 +10,7 @@ public class ProductionSystem {
 	
 	List<PalabraClave> memoriaTrabajo;
 	List<Rule> memoriaProduccion;
-	List<String> memoriaCotejo; //Esto es una memoria temporal
+	List<PalabraClave> memoriaCotejo; //Esto es una memoria temporal
 	String log; //Esto es el log que se va a ir mostrando en la interfaz
 	
 	//Constructor
@@ -20,15 +20,15 @@ public class ProductionSystem {
 	}
 
 	public void InitClass() {
-		this.memoriaCotejo = new ArrayList<String>();
+		this.memoriaCotejo = new ArrayList<PalabraClave>();
 		this.memoriaTrabajo = IniciarMemoriaTrabajo();
 		this.memoriaProduccion = IniciarMemoriaProduccion(memoriaTrabajo);
 		this.log = "";
 		
-		/* TODO Acá lo que hay que hacer, es un while o algo que se repita todo el tiempo y pida ingresar frases,
-		 * por cada frase que se ingrese, buscar las palabras claves de dicha frase y agregarlas a la memoriaCotejo,
-		 * luego pasar la memoriaCotejo al método Resolve() de la clase InferenceEngine y esta va a devolver una
-		 * acción si las palabrasClaves enviadas verifican alguna acción*/
+		/* LINEAS DE TEST
+		memoriaCotejo = getListaPalabrasClaves("Esto es una prueba del método what aged collage",memoriaTrabajo);
+		System.out.println("/");
+		*/
 
 	}
 
@@ -37,6 +37,7 @@ public class ProductionSystem {
 		
 		List<PalabraClave> auxList = new ArrayList<PalabraClave>();
 		
+		//Las palabras con sinónimos les ponemos nombre pX y van después de este comentario
 		PalabraClave p1 = new PalabraClave("name", new ArrayList<String>());
 		p1.getSinonimos().add("forename");
 		p1.getSinonimos().add("noun");
@@ -167,7 +168,27 @@ public class ProductionSystem {
 		p14.getSinonimos().add("avocation");
 		auxList.add(p14);
 		
-        
+		
+		//Las palabras que se usan para preguntar se definen como ppX y van después de este comentario
+		PalabraClave pp1 = new PalabraClave("who", new ArrayList<String>());
+		auxList.add(pp1);
+
+		PalabraClave pp2 = new PalabraClave("what", new ArrayList<String>());
+		pp2.getSinonimos().add("what's");
+		auxList.add(pp2);
+
+		PalabraClave pp3 = new PalabraClave("where", new ArrayList<String>());
+		auxList.add(pp3);
+
+		PalabraClave pp4 = new PalabraClave("when", new ArrayList<String>());
+		auxList.add(pp4);
+
+		PalabraClave pp5 = new PalabraClave("why", new ArrayList<String>());
+		auxList.add(pp5);
+
+		PalabraClave pp6 = new PalabraClave("how", new ArrayList<String>());
+		auxList.add(pp6);
+
 		return auxList;
 	}
 
@@ -176,15 +197,97 @@ public class ProductionSystem {
 		List<Rule> auxList = new ArrayList<Rule>();
 		
 		Rule r1 = new Rule(new ArrayList<PalabraClave>(), "ACCION 1");
-		//Esto es para agregar palabras clave a la regla directamente desde la memoria de trabajo
-		r1.getCondicion().add((PalabraClave) memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("PalabraClave1")));
-		r1.getCondicion().add((PalabraClave) memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("PalabraClave2")));
-		r1.getCondicion().add((PalabraClave) memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("PalabraClave3")));
+		/*Esto es para agregar palabras clave a la regla directamente desde la memoria de trabajo
+		 * NOTA: Si les tira error acá, es porque ingresaron una PC que no está en la memoria de trabajo*/
+		r1.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("what")).findFirst().get());
+		r1.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("name")).findFirst().get());
+		//Esto es para agregar acción de la regla
+		r1.setAccion(Rule.ACTION_RULE2);
 		auxList.add(r1);
+		
+		Rule r2 = new Rule(new ArrayList<PalabraClave>(), "");
+		r2.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("where")).findFirst().get());
+		r2.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("money")).findFirst().get());
+		//Esto es para agregar acción de la regla
+		r2.setAccion(Rule.ACTION_RULE7);
+		auxList.add(r2);
 		
 		return auxList;
 
 	}
+	
+	/*Este método es que se llama desde la UI, recibe una frase ingresada y las dos memorias.
+	 * Retorna un String con una acción que verifique alguna regla*/
+	public static String NewQuery(String frase, List<PalabraClave> memoriaTrabajo, List<Rule> memoriaProduccion) {
+		frase = FormatFrase(frase);
+		List<PalabraClave> nuevasPalabrasClaves = getListaPalabrasClaves(frase.toLowerCase(), memoriaTrabajo); //Esto es una lista de PC de la frase
+		List<Rule> listaReglas = new ArrayList<Rule>();
+		
+		/*Recorre todas las reglas de la memoria de producción y se fija si existe alguna regla, cuyas condiciones,
+		 * esten incluídas todas en las "nuevasPalabrasClaves"*/
+		for (Rule itemRule : memoriaProduccion) {
+			if(nuevasPalabrasClaves.containsAll(itemRule.getCondicion())) {
+				listaReglas.add(itemRule);
+			}
+		}
+		
+		/*Si no se verifica ninguna regla, devuelve "No hacer nada",
+		 * Si verifica una regla, devuelve la acción de la primera de la lista*/
+		if(listaReglas.isEmpty()) {
+			return Rule.ACTION_RULE1;
+		}
+		else {
+			return listaReglas.stream().findFirst().get().getAccion();
+		}
+	}
+	
+	/*Esto método es para limpiar la frase para que solo queren palabras, es decir,
+	 * elimina signos, acentos, etc*/
+	private static String FormatFrase(String frase) {
+		
+		frase = frase.replace("?", "");
+		frase = frase.replace("¿", "");
+		frase = frase.replace("!", "");
+		frase = frase.replace("¡", "");
+		frase = frase.replace("á", "a");
+		frase = frase.replace("é", "e");
+		frase = frase.replace("í", "i");
+		frase = frase.replace("ó", "o");
+		frase = frase.replace("ó", "u");
+		frase = frase.toLowerCase(); //Esto pasa todo a minuscula
+		
+		return frase;
+
+	}
+
+	private static List<PalabraClave> getListaPalabrasClaves(String frase, List<PalabraClave> memoriaTrabajo)
+	{
+		String[] palabras = frase.split("\\s+");		
+		List<PalabraClave> listaAux = new ArrayList<PalabraClave>();
+
+		/*Esto recorre cada palabra de la frase y:
+		 * si coincide con alguna palabra clave, lo agrega a la lista,
+		 * si no coincide, busca en los sinonimos, si coincide con algun sinonimo, agrega
+		 * si no, deja pasar la palabra sin hacer nada*/
+		for (int i = 0; i < palabras.length; i++) {
+			String palabraAux = palabras[i];
+			if(memoriaTrabajo.stream().anyMatch(pc -> pc.getPalabraClave().equals(palabraAux))) {
+				listaAux.add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals(palabraAux)).findFirst().get());
+			}
+			else {
+				for (PalabraClave itemPalabraClave : memoriaTrabajo) {
+					if(itemPalabraClave.getSinonimos().stream().anyMatch(sinonimo -> sinonimo.equals(palabraAux))) {
+						listaAux.add(itemPalabraClave);
+					}
+				}	
+			}		
+		}
+
+		return listaAux;
+	}
+	
+	
+	
 
 	public List<PalabraClave> getMemoriaTrabajo() {
 		return memoriaTrabajo;
@@ -202,11 +305,11 @@ public class ProductionSystem {
 		this.memoriaProduccion = memoriaProduccion;
 	}
 
-	public List<String> getMemoriaCotejo() {
+	public List<PalabraClave> getMemoriaCotejo() {
 		return memoriaCotejo;
 	}
 
-	public void setMemoriaCotejo(List<String> memoriaCotejo) {
+	public void setMemoriaCotejo(List<PalabraClave> memoriaCotejo) {
 		this.memoriaCotejo = memoriaCotejo;
 	}
 
