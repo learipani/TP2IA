@@ -221,24 +221,8 @@ public class ProductionSystem {
 	public static String NewQuery(String frase, List<PalabraClave> memoriaTrabajo, List<Rule> memoriaProduccion) {
 		frase = FormatFrase(frase);
 		List<PalabraClave> nuevasPalabrasClaves = getListaPalabrasClaves(frase.toLowerCase(), memoriaTrabajo); //Esto es una lista de PC de la frase
-		List<Rule> listaReglas = new ArrayList<Rule>();
-		
-		/*Recorre todas las reglas de la memoria de producción y se fija si existe alguna regla, cuyas condiciones,
-		 * esten incluídas todas en las "nuevasPalabrasClaves"*/
-		for (Rule itemRule : memoriaProduccion) {
-			if(nuevasPalabrasClaves.containsAll(itemRule.getCondicion())) {
-				listaReglas.add(itemRule);
-			}
-		}
-		
-		/*Si no se verifica ninguna regla, devuelve "No hacer nada",
-		 * Si verifica una regla, devuelve la acción de la primera de la lista*/
-		if(listaReglas.isEmpty()) {
-			return Rule.ACTION_RULE1;
-		}
-		else {
-			return listaReglas.stream().findFirst().get().getAccion();
-		}
+
+		return InferenceEngine.Resolve(nuevasPalabrasClaves, memoriaProduccion);
 	}
 	
 	/*Esto método es para limpiar la frase para que solo queren palabras, es decir,
@@ -271,22 +255,16 @@ public class ProductionSystem {
 		 * si no, deja pasar la palabra sin hacer nada*/
 		for (int i = 0; i < palabras.length; i++) {
 			String palabraAux = palabras[i];
-			if(memoriaTrabajo.stream().anyMatch(pc -> pc.getPalabraClave().equals(palabraAux))) {
-				listaAux.add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals(palabraAux)).findFirst().get());
+			PalabraClave newPalabraClave = InferenceEngine.GetPalabraClave(palabraAux, memoriaTrabajo);
+			
+			if(newPalabraClave != null)
+			{
+				listaAux.add(newPalabraClave);
 			}
-			else {
-				for (PalabraClave itemPalabraClave : memoriaTrabajo) {
-					if(itemPalabraClave.getSinonimos().stream().anyMatch(sinonimo -> sinonimo.equals(palabraAux))) {
-						listaAux.add(itemPalabraClave);
-					}
-				}	
-			}		
 		}
-
+			
 		return listaAux;
 	}
-	
-	
 	
 
 	public List<PalabraClave> getMemoriaTrabajo() {
