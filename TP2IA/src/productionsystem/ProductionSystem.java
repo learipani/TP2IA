@@ -209,8 +209,27 @@ public class ProductionSystem {
 		r2.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("where")).findFirst().get());
 		r2.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("money")).findFirst().get());
 		//Esto es para agregar acción de la regla
-		r2.setAccion(Rule.ACTION_RULE7);
+		r2.setAccion(Rule.ACTION_RULE3);
 		auxList.add(r2);
+		
+	/*	Rule r3 = new Rule(new ArrayList<PalabraClave>(), "");
+		r3.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("where")).findFirst().get());
+		r3.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("money")).findFirst().get());
+		r3.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("school")).findFirst().get());
+		//Esto es para agregar acción de la regla
+		r3.setAccion(Rule.ACTION_RULE4);
+		auxList.add(r3);
+		
+		Rule r4 = new Rule(new ArrayList<PalabraClave>(), "");
+		r4.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("where")).findFirst().get());
+		r4.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("money")).findFirst().get());
+		r4.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("school")).findFirst().get());
+		r4.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("license")).findFirst().get());
+		r4.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("activity")).findFirst().get());
+
+		//Esto es para agregar acción de la regla
+		r4.setAccion(Rule.ACTION_RULE5);
+		auxList.add(r4);*/
 		
 		return auxList;
 
@@ -218,11 +237,11 @@ public class ProductionSystem {
 	
 	/*Este método es que se llama desde la UI, recibe una frase ingresada y las dos memorias.
 	 * Retorna un String con una acción que verifique alguna regla*/
-	public static String NewQuery(String frase, List<PalabraClave> memoriaTrabajo, List<Rule> memoriaProduccion) {
+	public static String NewQuery(String frase, List<PalabraClave> memoriaTrabajo, List<Rule> memoriaProduccion, int criterioResolucion) {
 		frase = FormatFrase(frase);
 		List<PalabraClave> nuevasPalabrasClaves = getListaPalabrasClaves(frase.toLowerCase(), memoriaTrabajo); //Esto es una lista de PC de la frase
 
-		return InferenceEngine.Resolve(nuevasPalabrasClaves, memoriaProduccion);
+		return InferenceEngine.Resolve(nuevasPalabrasClaves, memoriaProduccion, criterioResolucion);
 	}
 	
 	/*Esto método es para limpiar la frase para que solo queren palabras, es decir,
@@ -303,7 +322,5 @@ public class ProductionSystem {
 		this.log += "\n"+log;
 	}
 	
-	
-
 	
 }

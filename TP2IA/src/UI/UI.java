@@ -23,7 +23,7 @@ import java.awt.event.ActionEvent;
 
 public class UI {
 
-	private JFrame frmTpIa;
+	JFrame frmTpIa;
 	private JTextField textFieldSmartToySay;
 
 	ProductionSystem productionSystemInstace = new ProductionSystem();
@@ -75,7 +75,7 @@ public class UI {
 				String aux;
 				textAreaLog.append("SmartToy dice: " + textFieldSmartToySay.getText());
 				productionSystemInstace.appendLog(textFieldSmartToySay.getText());
-				aux = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion());
+				aux = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion(), 1);//se debe pasar el numero del algoritmo
 				textAreaLog.append("\n El dispositivo reacciona de la siguiente manera: " + aux);
 				textFieldSmartToySay.setText("");
 				textAreaLog.append("\n\n");
