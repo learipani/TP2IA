@@ -45,7 +45,6 @@ public class InferenceEngine {
 		
 		/*Si no se verifica ninguna regla, devuelve "No hacer nada",
 		 * Si existe una regla, devuelve la acción (que es la primera de la lista) */
-		
 		if(regla == null) {
 			return Rule.ACTION_RULE1;
 		}

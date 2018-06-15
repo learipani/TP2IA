@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JComboBox;
 
 public class UI {
 
@@ -54,6 +55,8 @@ public class UI {
 		frmTpIa.setBounds(100, 100, 1000, 500);
 		frmTpIa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTpIa.getContentPane().setLayout(null);
+		JComboBox comboBoxCriterio = new JComboBox();
+
 		
 		TextArea textAreaLog = new TextArea();
 		textAreaLog.setBackground(SystemColor.controlHighlight);
@@ -64,22 +67,45 @@ public class UI {
 		textFieldSmartToySay = new JTextField();
 		textFieldSmartToySay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String aux;
+				String accion = null;
 				textAreaLog.append("SmartToy dice: " + textFieldSmartToySay.getText());
 				productionSystemInstace.appendLog(textFieldSmartToySay.getText());
-				aux = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion(), 3);//se debe pasar el numero del algoritmo
-				textAreaLog.append("\n El dispositivo reacciona de la siguiente manera: " + aux);
+				switch (comboBoxCriterio.getSelectedIndex()) {
+				case 0:
+					//Aleatorio
+					accion = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion(), 1);//se debe pasar el numero del algoritmo
+					break;
+				case 1:
+					//Prioridad
+					accion = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion(), 2);//se debe pasar el numero del algoritmo
+					break;
+				case 2:
+					//Aleatorio
+					accion = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion(), 3);//se debe pasar el numero del algoritmo
+					break;
+				}
+				textAreaLog.append("\n El dispositivo reacciona de la siguiente manera: " + accion);
 				textFieldSmartToySay.setText("");
 				textAreaLog.append("\n\n");
-				
 			}
 		});
-		textFieldSmartToySay.setBounds(10, 82, 970, 25);
+		textFieldSmartToySay.setBounds(10, 82, 801, 25);
 		frmTpIa.getContentPane().add(textFieldSmartToySay);
 		textFieldSmartToySay.setColumns(10);
 		
 		JLabel lblIngreseUnaFrase = new JLabel("El SmartToy dice:");
 		lblIngreseUnaFrase.setBounds(10, 66, 139, 15);
 		frmTpIa.getContentPane().add(lblIngreseUnaFrase);
+		
+		JLabel lblCriterioDe = new JLabel("Criterio:");
+		lblCriterioDe.setBounds(823, 66, 139, 15);
+		frmTpIa.getContentPane().add(lblCriterioDe);
+		
+		comboBoxCriterio.setBounds(823, 82, 159, 24);
+		comboBoxCriterio.addItem("Especificidad");
+		comboBoxCriterio.addItem("Prioridad");
+		comboBoxCriterio.addItem("Aleatorio");
+		frmTpIa.getContentPane().add(comboBoxCriterio);
+		comboBoxCriterio.setSelectedIndex(0);
 	}
 }
