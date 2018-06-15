@@ -25,6 +25,8 @@ public class Rule{
 		this.condicion = condicion;
 		this.accion = accion;
 	}
+	public Rule() {
+	}
 	
 	//Getter y Setters
 	public List<PalabraClave> getCondicion() {

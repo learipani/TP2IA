@@ -14,24 +14,8 @@ public class InferenceEngine {
 		 * (las reglas),  y devuelve una acción si verifica alguna regla, en caso contrario
 		 * devuelve null*/
 		
-		switch (criterioResolucion) {
-		case 1:
-			AlgoritmoEspecificidad(memoriaProduccion);
-			break;
-
-		case 2:
-			AlgoritmoPrioridad();
-			break;
-			
-		case 3:
-			AlgoritmoAleatorio();
-			break;
-			
-		default:
-			break;
-		}
-		
 		List<Rule> listaReglas = new ArrayList<Rule>();
+		Rule regla = new Rule();
 		
 		/*Recorre todas las reglas de la memoria de producción y se fija si existe alguna regla, cuyas condiciones,
 		 * esten incluídas todas en la "memoriaCotejo"*/
@@ -40,19 +24,34 @@ public class InferenceEngine {
 				listaReglas.add(itemRule);
 			}
 		}
+		
+		switch (criterioResolucion) {
+		case 1:
+			regla = AlgoritmoEspecificidad(listaReglas);
+			break;
+
+		case 2:
+			AlgoritmoPrioridad();
+			break;
+			
+		case 3:
+			regla = algoritmoAleatorio(listaReglas);
+			break;
+			
+		default:
+			break;
+		}
+		
+		
 		/*Si no se verifica ninguna regla, devuelve "No hacer nada",
-		 * Si verifica una regla, devuelve la acción de la primera de la lista*/
-		if(listaReglas.isEmpty()) {
+		 * Si existe una regla, devuelve la acción (que es la primera de la lista) */
+		
+		if(regla == null) {
 			return Rule.ACTION_RULE1;
 		}
 		else {
-			return listaReglas.stream().findFirst().get().getAccion();
+			return regla.getAccion();
 		}
-		
-	}
-	
-	private static void AlgoritmoAleatorio() {
-		// TODO Auto-generated method stub
 		
 	}
 
@@ -61,8 +60,7 @@ public class InferenceEngine {
 		
 	}
 
-	private static void AlgoritmoEspecificidad(List<Rule> memoriaProduccion) {
-			List<Rule> auxList = new ArrayList<Rule>(); 
+	private static Rule AlgoritmoEspecificidad(List<Rule> memoriaProduccion) {
 			/*memoriaProduccion.size();
 			for(Rule rule : memoriaProduccion ) {
 				int prueba = rule.getCondicion().size();
@@ -80,9 +78,24 @@ public class InferenceEngine {
 						} 						
 							return 0;
 				}
-			});		
+			});
+			
+			if(!memoriaProduccion.isEmpty()) {
+				return memoriaProduccion.get(0);
+			}
+			else return null;
 	}
 
+	private static Rule algoritmoAleatorio(List<Rule> listaReglas) {
+		if(listaReglas.isEmpty()) {
+			return null;
+		}
+		else {
+			int numReglaAleatorio = (int) Math.floor(Math.random()*(listaReglas.size()));
+			return listaReglas.get(numReglaAleatorio);
+		}
+	}
+	
 	public static PalabraClave GetPalabraClave(String palabraDeFrase, List<PalabraClave> memoriaTrabajo) {
 		/* TODO Este método recibe una palabra de una frase, y, si existe en la memoria de
 		 * trabajo, devuelve la palabra clave de dicha palabra recibida, en caso contrario

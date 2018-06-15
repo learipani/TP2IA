@@ -4,20 +4,12 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.TextArea;
-import java.awt.BorderLayout;
-import javax.swing.BoxLayout;
 import javax.swing.JTextField;
 
-import productionsystem.InferenceEngine;
 import productionsystem.ProductionSystem;
 
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.Color;
 import java.awt.SystemColor;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -75,7 +67,7 @@ public class UI {
 				String aux;
 				textAreaLog.append("SmartToy dice: " + textFieldSmartToySay.getText());
 				productionSystemInstace.appendLog(textFieldSmartToySay.getText());
-				aux = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion(), 1);//se debe pasar el numero del algoritmo
+				aux = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion(), 3);//se debe pasar el numero del algoritmo
 				textAreaLog.append("\n El dispositivo reacciona de la siguiente manera: " + aux);
 				textFieldSmartToySay.setText("");
 				textAreaLog.append("\n\n");

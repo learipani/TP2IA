@@ -212,7 +212,7 @@ public class ProductionSystem {
 		r2.setAccion(Rule.ACTION_RULE3);
 		auxList.add(r2);
 		
-	/*	Rule r3 = new Rule(new ArrayList<PalabraClave>(), "");
+		Rule r3 = new Rule(new ArrayList<PalabraClave>(), "");
 		r3.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("where")).findFirst().get());
 		r3.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("money")).findFirst().get());
 		r3.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("school")).findFirst().get());
@@ -229,7 +229,7 @@ public class ProductionSystem {
 
 		//Esto es para agregar acción de la regla
 		r4.setAccion(Rule.ACTION_RULE5);
-		auxList.add(r4);*/
+		auxList.add(r4);
 		
 		return auxList;
 
