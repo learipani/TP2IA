@@ -18,13 +18,16 @@ public class Rule{
 	//Variables
 	private List<PalabraClave> condicion;
 	private String accion;
+	private int prioridad;
 
 	//Constructor
-	public Rule(List<PalabraClave> condicion, String accion) {
+	public Rule(List<PalabraClave> condicion, String accion, int prioridad) {
 		super();
 		this.condicion = condicion;
 		this.accion = accion;
+		this.prioridad = prioridad;
 	}
+	
 	public Rule() {
 	}
 	
@@ -42,10 +45,11 @@ public class Rule{
 		this.accion = accion;
 	}
 
-
-	
-	
-	
-
+	public int getPrioridad() {
+		return prioridad;
+	}
+	public void setPrioridad(int prioridad) {
+		this.prioridad = prioridad;
+	}
 	
 }

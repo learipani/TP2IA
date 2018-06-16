@@ -31,7 +31,7 @@ public class InferenceEngine {
 			break;
 
 		case 2:
-			AlgoritmoPrioridad();
+			regla = AlgoritmoPrioridad(listaReglas);
 			break;
 			
 		case 3:
@@ -54,9 +54,22 @@ public class InferenceEngine {
 		
 	}
 
-	private static void AlgoritmoPrioridad() {
-		// TODO Auto-generated method stub
+	private static Rule AlgoritmoPrioridad(List<Rule> listaReglas) {
 		
+		if(listaReglas.isEmpty()) {
+			return null;
+		}
+		else {
+			int prioridad = 0 ;
+			Rule regla = null;
+			for(Rule r : listaReglas) {
+				if(r.getPrioridad() > prioridad) {
+					prioridad =  r.getPrioridad();
+					regla = r;
+				}
+			}
+			return regla;
+		}		
 	}
 
 	private static Rule AlgoritmoEspecificidad(List<Rule> memoriaProduccion) {
