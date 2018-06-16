@@ -72,7 +72,8 @@ public class UI {
 				productionSystemInstace.appendLog(textFieldSmartToySay.getText());
 				switch (comboBoxCriterio.getSelectedIndex()) {
 				case 0:
-					//Aleatorio
+
+					//Especificidad
 					accion = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion(), 1);
 					break;
 				case 1:

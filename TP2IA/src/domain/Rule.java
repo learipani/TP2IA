@@ -50,12 +50,4 @@ public class Rule{
 	public void setPeso(int peso) {
 		this.peso = peso;
 	}
-	
-
-
-	
-	
-	
-
-	
 }
