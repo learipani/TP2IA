@@ -20,7 +20,10 @@ public class InferenceEngine {
 		/*Recorre todas las reglas de la memoria de producción y se fija si existe alguna regla, cuyas condiciones,
 		 * esten incluídas todas en la "memoriaCotejo"*/
 		for (Rule itemRule : memoriaProduccion) {
-			if(memoriaCotejo.containsAll(itemRule.getCondicion())) {
+			/*if(memoriaCotejo.containsAll(itemRule.getCondicion())) {
+				listaReglas.add(itemRule);
+			}*/
+			if(itemRule.getCondicion().containsAll(memoriaCotejo)) {
 				listaReglas.add(itemRule);
 			}
 		}
@@ -31,7 +34,7 @@ public class InferenceEngine {
 			break;
 
 		case 2:
-			AlgoritmoPrioridad();
+			regla = AlgoritmoPrioridad(listaReglas);
 			break;
 			
 		case 3:
@@ -54,9 +57,25 @@ public class InferenceEngine {
 		
 	}
 
-	private static void AlgoritmoPrioridad() {
-		// TODO Auto-generated method stub
+	private static Rule AlgoritmoPrioridad(List<Rule> memoriaProduccion) {
+
+		Collections.sort(memoriaProduccion, new Comparator<Rule>() {
+			@Override
+			public int compare(Rule r1, Rule r2) {
+					if(r1.getPeso()>r2.getPeso()) {
+						return -1;
+					}
+					if(r1.getPeso()<r2.getPeso()) {
+						return 1;
+					} 						
+						return 0;
+			}
+		});
 		
+		if(!memoriaProduccion.isEmpty()) {
+			return memoriaProduccion.get(0);
+		}
+		else return null;
 	}
 
 	private static Rule AlgoritmoEspecificidad(List<Rule> memoriaProduccion) {

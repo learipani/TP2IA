@@ -196,7 +196,7 @@ public class ProductionSystem {
 		/**TODO Acá hay que  crear todas las reglas que definamos**/
 		List<Rule> auxList = new ArrayList<Rule>();
 		
-		Rule r1 = new Rule(new ArrayList<PalabraClave>(), "ACCION 1");
+		Rule r1 = new Rule(new ArrayList<PalabraClave>(), "ACCION 1", 1);
 		/*Esto es para agregar palabras clave a la regla directamente desde la memoria de trabajo
 		 * NOTA: Si les tira error acá, es porque ingresaron una PC que no está en la memoria de trabajo*/
 		r1.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("what")).findFirst().get());
@@ -205,14 +205,14 @@ public class ProductionSystem {
 		r1.setAccion(Rule.ACTION_RULE2);
 		auxList.add(r1);
 		
-		Rule r2 = new Rule(new ArrayList<PalabraClave>(), "");
+		Rule r2 = new Rule(new ArrayList<PalabraClave>(), "", 3);
 		r2.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("where")).findFirst().get());
 		r2.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("money")).findFirst().get());
 		//Esto es para agregar acción de la regla
 		r2.setAccion(Rule.ACTION_RULE3);
 		auxList.add(r2);
 		
-		Rule r3 = new Rule(new ArrayList<PalabraClave>(), "");
+		Rule r3 = new Rule(new ArrayList<PalabraClave>(), "", 4);
 		r3.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("where")).findFirst().get());
 		r3.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("money")).findFirst().get());
 		r3.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("school")).findFirst().get());
@@ -220,7 +220,7 @@ public class ProductionSystem {
 		r3.setAccion(Rule.ACTION_RULE4);
 		auxList.add(r3);
 		
-		Rule r4 = new Rule(new ArrayList<PalabraClave>(), "");
+		Rule r4 = new Rule(new ArrayList<PalabraClave>(), "", 2);
 		r4.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("where")).findFirst().get());
 		r4.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("money")).findFirst().get());
 		r4.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("school")).findFirst().get());
@@ -284,7 +284,6 @@ public class ProductionSystem {
 			
 		return listaAux;
 	}
-	
 
 	public List<PalabraClave> getMemoriaTrabajo() {
 		return memoriaTrabajo;

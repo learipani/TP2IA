@@ -18,16 +18,19 @@ public class Rule{
 	//Variables
 	private List<PalabraClave> condicion;
 	private String accion;
+	private int peso;
 
 	//Constructor
-	public Rule(List<PalabraClave> condicion, String accion) {
-		super();
-		this.condicion = condicion;
-		this.accion = accion;
-	}
 	public Rule() {
 	}
 	
+	public Rule(List<PalabraClave> condicion, String accion, int peso) {
+		super();
+		this.condicion = condicion;
+		this.accion = accion;
+		this.peso = peso;
+	}
+
 	//Getter y Setters
 	public List<PalabraClave> getCondicion() {
 		return condicion;
@@ -41,6 +44,13 @@ public class Rule{
 	public void setAccion(String accion) {
 		this.accion = accion;
 	}
+	public int getPeso() {
+		return peso;
+	}
+	public void setPeso(int peso) {
+		this.peso = peso;
+	}
+	
 
 
 	

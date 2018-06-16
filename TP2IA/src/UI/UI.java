@@ -73,15 +73,15 @@ public class UI {
 				switch (comboBoxCriterio.getSelectedIndex()) {
 				case 0:
 					//Aleatorio
-					accion = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion(), 1);//se debe pasar el numero del algoritmo
+					accion = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion(), 1);
 					break;
 				case 1:
 					//Prioridad
-					accion = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion(), 2);//se debe pasar el numero del algoritmo
+					accion = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion(), 2);
 					break;
 				case 2:
 					//Aleatorio
-					accion = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion(), 3);//se debe pasar el numero del algoritmo
+					accion = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion(), 3);
 					break;
 				}
 				textAreaLog.append("\n El dispositivo reacciona de la siguiente manera: " + accion);
