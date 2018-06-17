@@ -24,7 +24,8 @@ public class InferenceEngine {
 			/*if(memoriaCotejo.containsAll(itemRule.getCondicion())) {
 				listaReglas.add(itemRule);
 			}*/
-			if(itemRule.getCondicion().containsAll(memoriaCotejo)) {
+			//if((itemRule.getCondicion()).containsAll(memoriaCotejo)) {
+			if(memoriaCotejo.containsAll(itemRule.getCondicion())) {
 				listaReglas.add(itemRule);
 			}
 		}
@@ -50,14 +51,31 @@ public class InferenceEngine {
 		
 		/*Si no se verifica ninguna regla, devuelve "No hacer nada",
 		 * Si existe una regla, devuelve la acción (que es la primera de la lista) */
+		
+			return MostartLog(regla, memoriaCotejo);
+			//return regla.getAccion();
+		
+		
+	}
+
+	private static String MostartLog(Rule regla, List<PalabraClave> memoriaCotejo) {
+		
+		
+		String salida ="\nEL AGENTE DETERMINO REALIZAR LA ACCION:  \n";
 		if(regla == null) {
-			return Rule.ACTION_RULE1;
+			salida+=Rule.ACTION_RULE1 +"\n";
 		}
 		else {
-			System.out.println(regla.getCondicion());
-			return regla.getAccion();
+			salida+=regla.getAccion() + "\n";
+				
+		if(!memoriaCotejo.isEmpty()) {
+		salida+= ("PORQUE RECONOCIO LAS PALABRAS CLAVES: \n");
+		for (PalabraClave pc : memoriaCotejo) {
+			  salida+=pc.getPalabraClave() + " \n";
+			}
 		}
-		
+		}
+	    return salida;
 	}
 
 	private static Rule AlgoritmoPrioridad(List<Rule> memoriaProduccion) {

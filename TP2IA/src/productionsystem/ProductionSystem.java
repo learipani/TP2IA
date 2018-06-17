@@ -94,7 +94,7 @@ public class ProductionSystem {
 		p7.getSinonimos().add("credit");
 		auxList.add(p7);
 
-		PalabraClave p8 = new PalabraClave("jewelry", new ArrayList<String>());
+		PalabraClave p8 = new PalabraClave("jewerly", new ArrayList<String>());
 		p8.getSinonimos().add("jewelers");
 		p8.getSinonimos().add("diamo");
 		p8.getSinonimos().add("gems");
@@ -197,7 +197,7 @@ public class ProductionSystem {
 		List<Rule> auxList = new ArrayList<Rule>();
 		
 
-		Rule r1 = new Rule(new ArrayList<PalabraClave>(), "ACCION 1", 1);
+		Rule r1 = new Rule(new ArrayList<PalabraClave>(), "", 1);
 
 		/*Esto es para agregar palabras clave a la regla directamente desde la memoria de trabajo
 		 * NOTA: Si les tira error acá, es porque ingresaron una PC que no está en la memoria de trabajo*/
@@ -210,29 +210,183 @@ public class ProductionSystem {
 		Rule r2 = new Rule(new ArrayList<PalabraClave>(), "", 3);
 		r2.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("where")).findFirst().get());
 		r2.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("money")).findFirst().get());
-		//Esto es para agregar acción de la regla
 		r2.setAccion(Rule.ACTION_RULE3);
 		auxList.add(r2);
 		
-		Rule r3 = new Rule(new ArrayList<PalabraClave>(), "", 4);
+		Rule r3 = new Rule(new ArrayList<PalabraClave>(), "", 6);
 
-		r3.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("where")).findFirst().get());
-		r3.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("money")).findFirst().get());
-		r3.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("school")).findFirst().get());
-		//Esto es para agregar acción de la regla
+		r3.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("what")).findFirst().get());
+		r3.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("bank")).findFirst().get());
 		r3.setAccion(Rule.ACTION_RULE4);
 		auxList.add(r3);
 		
 		Rule r4 = new Rule(new ArrayList<PalabraClave>(), "", 2);
 
-		r4.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("where")).findFirst().get());
-		r4.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("money")).findFirst().get());
+		r4.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("name")).findFirst().get());
 		r4.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("school")).findFirst().get());
-		r4.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("license")).findFirst().get());
-		r4.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("activity")).findFirst().get());
-		//Esto es para agregar acción de la regla
-		r4.setAccion(Rule.ACTION_RULE5);
+		r4.setAccion(Rule.ACTION_RULE3);
 		auxList.add(r4);
+		
+		Rule r5 = new Rule(new ArrayList<PalabraClave>(), "", 4);
+
+		r5.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("what")).findFirst().get());
+		r5.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("name")).findFirst().get());
+		r5.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("school")).findFirst().get());
+		r5.setAccion(Rule.ACTION_RULE4);
+		auxList.add(r5);
+		
+		Rule r6 = new Rule(new ArrayList<PalabraClave>(), "", 6);
+
+		r6.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("what")).findFirst().get());
+		r6.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("name")).findFirst().get());
+		r6.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("teacher")).findFirst().get());
+		r6.setAccion(Rule.ACTION_RULE4);
+		auxList.add(r6);
+		
+		Rule r7 = new Rule(new ArrayList<PalabraClave>(), "", 7);
+
+		r7.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("what")).findFirst().get());
+		r7.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("name")).findFirst().get());
+		r7.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("school")).findFirst().get());
+		r7.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("teacher")).findFirst().get());
+		r7.setAccion(Rule.ACTION_RULE6);
+		auxList.add(r7);
+		
+		Rule r8 = new Rule(new ArrayList<PalabraClave>(), "", 4);
+
+		r8.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("where")).findFirst().get());
+		r8.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("town")).findFirst().get());
+		r8.setAccion(Rule.ACTION_RULE4);
+		auxList.add(r8);
+		
+		Rule r9 = new Rule(new ArrayList<PalabraClave>(), "", 3);
+
+		r9.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("what")).findFirst().get());
+		r9.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("town")).findFirst().get());
+		r9.setAccion(Rule.ACTION_RULE3);
+		auxList.add(r9);
+		
+		Rule r10 = new Rule(new ArrayList<PalabraClave>(), "", 5);
+
+		r10.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("where")).findFirst().get());
+		r10.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("town")).findFirst().get());
+		r10.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("name")).findFirst().get());
+		r10.setAccion(Rule.ACTION_RULE5);
+		auxList.add(r10);
+		
+		Rule r11 = new Rule(new ArrayList<PalabraClave>(), "", 5);
+
+		r11.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("what")).findFirst().get());
+		r11.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("town")).findFirst().get());
+		r11.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("name")).findFirst().get());
+		r11.setAccion(Rule.ACTION_RULE7);
+		auxList.add(r11);
+		
+		Rule r12 = new Rule(new ArrayList<PalabraClave>(), "", 8);
+
+		r12.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("where")).findFirst().get());
+		r12.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("jewerly")).findFirst().get());
+		r12.setAccion(Rule.ACTION_RULE7);
+		auxList.add(r12);
+		
+		Rule r13 = new Rule(new ArrayList<PalabraClave>(), "", 9);
+
+		r13.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("jewerly")).findFirst().get());
+		r13.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("money")).findFirst().get());
+		r13.setAccion(Rule.ACTION_RULE8);
+		auxList.add(r13);
+		
+		Rule r14 = new Rule(new ArrayList<PalabraClave>(), "", 10);
+
+		r14.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("what")).findFirst().get());
+		r14.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("jewerly")).findFirst().get());
+		r14.setAccion(Rule.ACTION_RULE6);
+		auxList.add(r14);
+		
+		Rule r15 = new Rule(new ArrayList<PalabraClave>(), "", 6);
+
+		r15.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("job")).findFirst().get());
+		r15.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("name")).findFirst().get());
+		r15.setAccion(Rule.ACTION_RULE3);
+		auxList.add(r15);
+		
+		Rule r16 = new Rule(new ArrayList<PalabraClave>(), "", 7);
+
+		r16.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("what")).findFirst().get());
+		r16.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("job")).findFirst().get());
+		r16.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("name")).findFirst().get());
+		r16.setAccion(Rule.ACTION_RULE6);
+		auxList.add(r16);
+		
+		
+		Rule r17 = new Rule(new ArrayList<PalabraClave>(), "", 5);
+
+		r17.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("where")).findFirst().get());
+		r17.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("job")).findFirst().get());
+		r17.setAccion(Rule.ACTION_RULE6);
+		auxList.add(r17);
+		
+		Rule r18 = new Rule(new ArrayList<PalabraClave>(), "", 4);
+
+		r18.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("what")).findFirst().get());
+		r18.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("job")).findFirst().get());
+		r18.setAccion(Rule.ACTION_RULE6);
+		auxList.add(r18);
+		
+		Rule r19 = new Rule(new ArrayList<PalabraClave>(), "", 4);
+
+		r19.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("where")).findFirst().get());
+		r19.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("money")).findFirst().get());
+		r19.setAccion(Rule.ACTION_RULE10);
+		auxList.add(r19);
+		
+		Rule r20 = new Rule(new ArrayList<PalabraClave>(), "", 6);
+
+		r20.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("where")).findFirst().get());
+		r20.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("jewerly")).findFirst().get());
+		r20.setAccion(Rule.ACTION_RULE10);
+		auxList.add(r20);
+		
+		Rule r21 = new Rule(new ArrayList<PalabraClave>(), "", 7);
+
+		r21.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("necklace")).findFirst().get());
+		r21.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("jewerly")).findFirst().get());
+		r21.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("money")).findFirst().get());
+		r21.setAccion(Rule.ACTION_RULE8);
+		auxList.add(r21);
+		
+		Rule r22 = new Rule(new ArrayList<PalabraClave>(), "", 4);
+
+		r22.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("where")).findFirst().get());
+		r22.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("necklace")).findFirst().get());
+		r22.setAccion(Rule.ACTION_RULE7);
+		auxList.add(r22);
+		
+		Rule r23 = new Rule(new ArrayList<PalabraClave>(), "", 5);
+
+		r23.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("activity")).findFirst().get());
+		r23.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("job")).findFirst().get());
+		r23.setAccion(Rule.ACTION_RULE5);
+		auxList.add(r23);
+		
+		Rule r24 = new Rule(new ArrayList<PalabraClave>(), "", 2);
+
+		r24.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("license")).findFirst().get());
+		r24.setAccion(Rule.ACTION_RULE4);
+		auxList.add(r24);
+		
+		Rule r25 = new Rule(new ArrayList<PalabraClave>(), "", 4);
+
+		r25.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("town")).findFirst().get());
+		r25.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("home")).findFirst().get());
+		r25.setAccion(Rule.ACTION_RULE2);
+		auxList.add(r25);
+		
+		Rule r26 = new Rule(new ArrayList<PalabraClave>(), "", 1);
+
+		r26.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("town")).findFirst().get());
+		r26.setAccion(Rule.ACTION_RULE2);
+		auxList.add(r26);
 		
 		return auxList;
 

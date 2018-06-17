@@ -85,7 +85,8 @@ public class UI {
 					accion = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion(), 3);
 					break;
 				}
-				textAreaLog.append("\n El dispositivo reacciona de la siguiente manera: " + accion);
+				//textAreaLog.append("\n El dispositivo reacciona de la siguiente manera: " + accion);
+				textAreaLog.append(accion);
 				textFieldSmartToySay.setText("");
 				textAreaLog.append("\n\n");
 			}
