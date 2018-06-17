@@ -19,6 +19,7 @@ public class InferenceEngine {
 		
 		/*Recorre todas las reglas de la memoria de producción y se fija si existe alguna regla, cuyas condiciones,
 		 * esten incluídas todas en la "memoriaCotejo"*/
+		if(!memoriaCotejo.isEmpty()) {
 		for (Rule itemRule : memoriaProduccion) {
 			/*if(memoriaCotejo.containsAll(itemRule.getCondicion())) {
 				listaReglas.add(itemRule);
@@ -26,6 +27,7 @@ public class InferenceEngine {
 			if(itemRule.getCondicion().containsAll(memoriaCotejo)) {
 				listaReglas.add(itemRule);
 			}
+		}
 		}
 		
 		switch (criterioResolucion) {
@@ -52,6 +54,7 @@ public class InferenceEngine {
 			return Rule.ACTION_RULE1;
 		}
 		else {
+			System.out.println(regla.getCondicion());
 			return regla.getAccion();
 		}
 		
