@@ -168,6 +168,20 @@ public class ProductionSystem {
 		p14.getSinonimos().add("avocation");
 		auxList.add(p14);
 		
+		PalabraClave p15 = new PalabraClave("dad", new ArrayList<String>());
+		p15.getSinonimos().add("dad's");
+		p15.getSinonimos().add("daddy");
+		p15.getSinonimos().add("dad");
+		auxList.add(p15);
+		
+		PalabraClave p16 = new PalabraClave("mom", new ArrayList<String>());
+		p16.getSinonimos().add("mom's");
+		p16.getSinonimos().add("mom");
+		auxList.add(p16);
+		
+		PalabraClave p17 = new PalabraClave("parents", new ArrayList<String>());
+		p17.getSinonimos().add("parents");
+		auxList.add(p17);
 		
 		//Las palabras que se usan para preguntar se definen como ppX y van después de este comentario
 		PalabraClave pp1 = new PalabraClave("who", new ArrayList<String>());
@@ -388,6 +402,49 @@ public class ProductionSystem {
 		r26.setAccion(Rule.ACTION_RULE2);
 		auxList.add(r26);
 		
+		Rule r27 = new Rule(new ArrayList<PalabraClave>(), "", 4);
+		r27.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("name")).findFirst().get());
+		r27.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("dad")).findFirst().get());
+		r27.setAccion(Rule.ACTION_RULE6);
+		auxList.add(r27);
+		
+		Rule r28 = new Rule(new ArrayList<PalabraClave>(), "", 4);
+		r28.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("name")).findFirst().get());
+		r28.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("mom")).findFirst().get());
+		r28.setAccion(Rule.ACTION_RULE6);
+		auxList.add(r28);
+		
+		Rule r29 = new Rule(new ArrayList<PalabraClave>(), "", 5);
+		r29.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("name")).findFirst().get());
+		r29.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("dad")).findFirst().get());
+		r29.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("mom")).findFirst().get());
+		r29.setAccion(Rule.ACTION_RULE7);
+		auxList.add(r29);
+		
+		Rule r30 = new Rule(new ArrayList<PalabraClave>(), "", 5);
+		r30.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("activity")).findFirst().get());
+		r30.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("school")).findFirst().get());
+		r30.setAccion(Rule.ACTION_RULE5);
+		auxList.add(r30);
+		
+		Rule r31 = new Rule(new ArrayList<PalabraClave>(), "", 2);
+		r31.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("how")).findFirst().get());
+		r31.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("school")).findFirst().get());
+		r31.setAccion(Rule.ACTION_RULE2);
+		auxList.add(r31);
+		
+		Rule r32 = new Rule(new ArrayList<PalabraClave>(), "", 2);
+		r32.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("parents")).findFirst().get());
+		r32.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("necklace")).findFirst().get());
+		r32.setAccion(Rule.ACTION_RULE4);
+		auxList.add(r32);
+		
+		Rule r33 = new Rule(new ArrayList<PalabraClave>(), "", 4);
+		r33.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("name")).findFirst().get());
+		r33.getCondicion().add(memoriaTrabajo.stream().filter(pc -> pc.getPalabraClave().equals("parents")).findFirst().get());
+		r33.setAccion(Rule.ACTION_RULE5);
+		auxList.add(r33);
+		
 		return auxList;
 
 	}
@@ -432,7 +489,6 @@ public class ProductionSystem {
 		for (int i = 0; i < palabras.length; i++) {
 			String palabraAux = palabras[i];
 			PalabraClave newPalabraClave = InferenceEngine.GetPalabraClave(palabraAux, memoriaTrabajo);
-			
 			if(newPalabraClave != null)
 			{
 				listaAux.add(newPalabraClave);
