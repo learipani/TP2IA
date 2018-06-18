@@ -9,12 +9,13 @@ import domain.*;
 /*Este método solo contiene método estáticos, se usa para inferir cosas*/
 public class InferenceEngine {
 	
+	static List<Rule> listaReglas = new ArrayList<Rule>();
+
 	public static String Resolve(List<PalabraClave> memoriaCotejo, List<Rule> memoriaProduccion, int criterioResolucion) {
 		/* TODO Este método recibe la memoria temporal (cotejo) y la memoria de producción
 		 * (las reglas),  y devuelve una acción si verifica alguna regla, en caso contrario
 		 * devuelve null*/
 		
-		List<Rule> listaReglas = new ArrayList<Rule>();
 		Rule regla = new Rule();
 		
 		/*Recorre todas las reglas de la memoria de producción y se fija si existe alguna regla, cuyas condiciones,
@@ -153,6 +154,10 @@ public class InferenceEngine {
 		
 		return null;
 		
+	}
+
+	public static List<Rule> GetReglasPreseleccionadas() {
+		return listaReglas;
 	}
 	
 }

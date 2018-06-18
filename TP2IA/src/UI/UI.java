@@ -6,11 +6,15 @@ import javax.swing.JFrame;
 import java.awt.TextArea;
 import javax.swing.JTextField;
 
+import domain.PalabraClave;
+import domain.Rule;
+import productionsystem.InferenceEngine;
 import productionsystem.ProductionSystem;
 
 import javax.swing.JLabel;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
+import java.util.List;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 
@@ -52,7 +56,7 @@ public class UI {
 		frmTpIa = new JFrame();
 		frmTpIa.setTitle("TP IA");
 		frmTpIa.setResizable(false);
-		frmTpIa.setBounds(100, 100, 1000, 500);
+		frmTpIa.setBounds(100, 100, 1000, 780);
 		frmTpIa.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTpIa.getContentPane().setLayout(null);
 		JComboBox comboBoxCriterio = new JComboBox();
@@ -63,6 +67,12 @@ public class UI {
 		textAreaLog.setEditable(false);
 		textAreaLog.setBounds(10, 143, 972, 314);
 		frmTpIa.getContentPane().add(textAreaLog);
+		
+		TextArea textArea = new TextArea();
+		textArea.setEditable(false);
+		textArea.setBackground(SystemColor.controlHighlight);
+		textArea.setBounds(10, 463, 972, 258);
+		frmTpIa.getContentPane().add(textArea);
 		
 		textFieldSmartToySay = new JTextField();
 		textFieldSmartToySay.addActionListener(new ActionListener() {
@@ -89,6 +99,23 @@ public class UI {
 				textAreaLog.append(accion);
 				textFieldSmartToySay.setText("");
 				textAreaLog.append("\n\n");
+				
+				
+				List<Rule> listaReglas = InferenceEngine.GetReglasPreseleccionadas();
+				textArea.append("REGLAS PRESELECCIONADAS: \n");
+				int i=1;
+				for(Rule r: listaReglas) {
+					textArea.append("Regla " + i +"\n");
+					i++;
+					
+					for(PalabraClave pc: r.getCondicion()) {
+						textArea.append(pc.getPalabraClave().toString()+", ");
+					}
+					textArea.append("\n");
+
+				}
+				textArea.append("\n");
+
 			}
 		});
 		textFieldSmartToySay.setBounds(10, 82, 801, 25);
@@ -109,5 +136,7 @@ public class UI {
 		comboBoxCriterio.addItem("Aleatorio");
 		frmTpIa.getContentPane().add(comboBoxCriterio);
 		comboBoxCriterio.setSelectedIndex(0);
+		
+
 	}
 }
