@@ -78,19 +78,21 @@ public class UI {
 		textFieldSmartToySay.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String accion = null;
+				String criterio = null; 
 				textAreaLog.append("SmartToy dice: " + textFieldSmartToySay.getText());
 				productionSystemInstace.appendLog(textFieldSmartToySay.getText());
 				switch (comboBoxCriterio.getSelectedIndex()) {
 				case 0:
-					//Especificidad
+					criterio = "ESPECIFICIDAD";
 					accion = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion(), 1);
 					break;
 				case 1:
-					//Prioridad
+					
+					criterio ="PRIORIDAD";
 					accion = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion(), 2);
 					break;
 				case 2:
-					//Aleatorio
+					criterio ="ALEATORIO";
 					accion = ProductionSystem.NewQuery(textFieldSmartToySay.getText(), productionSystemInstace.getMemoriaTrabajo(), productionSystemInstace.getMemoriaProduccion(), 3);
 					break;
 				}
@@ -101,7 +103,7 @@ public class UI {
 				
 				
 				List<Rule> listaReglas = InferenceEngine.GetReglasPreseleccionadas();
-				textArea.append("REGLAS PRESELECCIONADAS: \n");
+				textArea.append("REGLAS PRESELECCIONADAS CON CRITERIO "+criterio+ ": \n");
 				int i=1;
 				for(Rule r: listaReglas) {
 					textArea.append("Regla " + i +"\n");

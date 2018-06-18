@@ -9,7 +9,7 @@ import domain.*;
 /*Este método solo contiene método estáticos, se usa para inferir cosas*/
 public class InferenceEngine {
 	
-	static List<Rule> listaReglas = new ArrayList<Rule>();
+	static List<Rule> listaReglasPreseleccionadas = new ArrayList<Rule>();
 
 	public static String Resolve(List<PalabraClave> memoriaCotejo, List<Rule> memoriaProduccion, int criterioResolucion) {
 		/* TODO Este método recibe la memoria temporal (cotejo) y la memoria de producción
@@ -17,6 +17,8 @@ public class InferenceEngine {
 		 * devuelve null*/
 		
 		Rule regla = new Rule();
+		List<Rule> listaReglas = new ArrayList<Rule>();
+
 		
 		/*Recorre todas las reglas de la memoria de producción y se fija si existe alguna regla, cuyas condiciones,
 		 * esten incluídas todas en la "memoriaCotejo"*/
@@ -49,6 +51,8 @@ public class InferenceEngine {
 			break;
 		}
 		
+		listaReglasPreseleccionadas.clear();
+		listaReglasPreseleccionadas=listaReglas;
 		
 		/*Si no se verifica ninguna regla, devuelve "No hacer nada",
 		 * Si existe una regla, devuelve la acción (que es la primera de la lista) */
@@ -157,7 +161,7 @@ public class InferenceEngine {
 	}
 
 	public static List<Rule> GetReglasPreseleccionadas() {
-		return listaReglas;
+		return listaReglasPreseleccionadas;
 	}
 	
 }
